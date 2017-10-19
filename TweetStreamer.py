@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import tweepy
 from tweepy import Stream
 from tweepy import OAuthHandler
@@ -32,7 +33,6 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
     username='3efc3d64-d9ee-43b3-a289-e530bad6347b',
     password='uDs5p3a4CPyd')
 
-
 def natural_language(tweet):
     response = natural_language_understanding.analyze(
         text=tweet,
@@ -46,29 +46,29 @@ def fix_tstamp(tstamp):
     date = datetime.datetime.strptime(date, '%a %b %d %H:%M:%S %Y')
     return str(date)
 
-
-
 class listener(StreamListener):
     def on_data(self, data):
-        print(data)
         data = json.loads(data)
-        if not data['retweeted'] and '@realDonaldTrump' not in data['text']:
-            data["created_at"] = fix_tstamp(data["created_at"])
-            indexdate = data["created_at"][:7]
-            try:
-                data["watson_natural_lang"] = (natural_language(data["text"]))
-            except:
-                print data["text"]
-                pass
-            print data
-            #es.index(index='presidentialtweets-' + indexdate, doc_type='twitter', id=data["id"], body=data)
-            return(True)
+        if data is not None:
+            if not data['retweeted'] and '@realDonaldTrump' not in data['text'] and data['in_reply_to_user_id']\
+                    is not '25073877' and data['user']['id'] == '25073877':
+                data["created_at"] = fix_tstamp(data["created_at"])
+                indexdate = data["created_at"][:7]
+                print(data)
+                try:
+                    data["watson_natural_lang"] = (natural_language(data["text"]))
+                except:
+                    print data["text"]
+                    pass
+                print data
+                #es.index(index='presidentialtweets-' + indexdate, doc_type='twitter', id=data["id"], body=data)
+                return(True)
+        else:
+            pass
     def on_error(self, status):
         print status
 
-def main():
+
+while True:
     twitterStream = Stream(auth, listener())
     twitterStream.filter(follow=['25073877'])
-
-if __name__ == '__main__':
-    main()
