@@ -12,3 +12,6 @@ Monitors directory and uploads any file that's placed there to the [Viper Framew
 ## dynamic_cloudflare.py
 Updates cloudflare with your IP. Helpful if you don't have anything else to update it and are on a dynamic IP from your ISP.<br>
 Example usage in cron: `*/5 * * * * /opt/Cloudflare_Scripts/dynamicDNS.py dyn.domain.tech`
+
+## reverseit_monitor.py
+Monitors Hybrid Analysis [feed](https://www.hybrid-analysis.com/feed?json) for uploaded items. Won't catch it all but gets a good sampling. Handy for some fun stats / monitoring in elastic.
