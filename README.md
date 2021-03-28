@@ -15,3 +15,6 @@ Example usage in cron: `*/5 * * * * /opt/Cloudflare_Scripts/dynamicDNS.py dyn.do
 
 ## reverseit_monitor.py
 Monitors Hybrid Analysis [feed](https://www.hybrid-analysis.com/feed?json) for uploaded items. Won't catch it all but gets a good sampling. Handy for some fun stats / monitoring in elastic.
+
+## ip_block.py
+Monitors kafka for IPs to block. Blocks IP and reports it as an indicator to MISP.
