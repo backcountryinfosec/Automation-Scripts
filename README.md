@@ -18,3 +18,7 @@ Monitors Hybrid Analysis [feed](https://www.hybrid-analysis.com/feed?json) for u
 
 ## ip_block.py
 Monitors kafka for IPs to block. Blocks IP and reports it as an indicator to MISP.
+
+## censys_monitor.py
+Monitors censys for new cert registrations. Can use multiple api keys and works best with below cronjob.<br>
+`0 */3 * * * /opt/censys/venv/bin/python /opt/censys/censys_monitor.py`
