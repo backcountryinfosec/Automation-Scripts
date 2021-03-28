@@ -22,3 +22,7 @@ Monitors kafka for IPs to block. Blocks IP and reports it as an indicator to MIS
 ## censys_monitor.py
 Monitors censys for new cert registrations. Can use multiple api keys and works best with below cronjob.<br>
 `0 */3 * * * /opt/censys/venv/bin/python /opt/censys/censys_monitor.py`
+
+## dynamicDNS.py
+Monitors public IP and reports that to cloudflare to update the IP there. 
+`*/5 * * * * /opt/Cloudflare_Scripts/dynamicDNS.py dyn.remynse.tech`
